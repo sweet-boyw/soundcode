@@ -20,6 +20,7 @@ class Observer {
 }
 // vue数据劫持方法
 function defineReactive(data, key, value) {
+    observer(value) // 深度劫持
     Object.defineProperty(data, key, {
         get() {
             console.log("获取")
@@ -28,6 +29,7 @@ function defineReactive(data, key, value) {
         set(newValue, oldValue) {
             console.log("设置")
             if (newValue === value) return
+            observer(newValue)
             value = newValue
         }
     })

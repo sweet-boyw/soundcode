@@ -76,6 +76,7 @@
     return Observer;
   }(); // vue数据劫持方法
   function defineReactive(data, key, value) {
+    observer(value); // 深度劫持
     Object.defineProperty(data, key, {
       get: function get() {
         console.log("获取");
@@ -84,6 +85,7 @@
       set: function set(newValue, oldValue) {
         console.log("设置");
         if (newValue === value) return;
+        observer(newValue);
         value = newValue;
       }
     });
@@ -110,7 +112,7 @@
    */
   function initData(vm) {
     // console.log(vm)
-    console.log("初始化data", vm.$options.data);
+    // console.log("初始化data", vm.$options.data)
     var data = vm.$options.data;
     data = vm._data = typeof data === "function" ? data.call(vm) : data;
     // 对数据进行劫持

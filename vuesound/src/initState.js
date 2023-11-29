@@ -34,7 +34,7 @@ function initProps() {
  */
 function initData(vm) {
     // console.log(vm)
-    console.log("初始化data", vm.$options.data)
+    // console.log("初始化data", vm.$options.data)
     let data = vm.$options.data
     data = vm._data = typeof data === "function" ? data.call(vm) : data
     // 对数据进行劫持
